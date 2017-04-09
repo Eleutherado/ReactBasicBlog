@@ -1,3 +1,9 @@
+# ReactBasicBlog
+
+Basic Multi-page Blog, allows viewing posting and deleting.
+
+---
+Stephen Grider's original Readme
 # ReduxSimpleStarter
 
 Interested in learning [Redux](https://www.udemy.com/react-redux/)?
