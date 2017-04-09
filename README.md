@@ -1,7 +1,7 @@
 # ReactBasicBlog
 
 Basic Multi-page Blog, allows viewing posting and deleting.
-Used backend (API)[https://reduxblog.herokuapp.com/] by Stephen Grider 
+Used backend [API](https://reduxblog.herokuapp.com/) by Stephen Grider 
 
 ---
 Stephen Grider's original Readme
