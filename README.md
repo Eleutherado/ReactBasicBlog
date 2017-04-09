@@ -1,3 +1,10 @@
+# ReactBasicBlog
+
+Basic Multi-page Blog, allows viewing posting and deleting.
+Used backend [API](https://reduxblog.herokuapp.com/) by Stephen Grider 
+
+---
+Stephen Grider's original Readme
 # ReduxSimpleStarter
 
 Interested in learning [Redux](https://www.udemy.com/react-redux/)?
