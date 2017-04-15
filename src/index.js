@@ -16,3 +16,6 @@ ReactDOM.render(
     <Router history={browserHistory} routes={routes} />
   </Provider>
   , document.querySelector('.container'));
+
+
+// I think I am too confused on what is happening with my app internally.
