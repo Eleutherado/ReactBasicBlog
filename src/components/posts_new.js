@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { reduxForm, Field } from 'redux-form'; // new Component Field
 import { createPost } from "../actions/index";
 //import { connect } from "react-redux";
+import { Link } from "react-router";
 
 class PostsNew extends Component {
   /* redux-form v6
@@ -71,8 +72,10 @@ class PostsNew extends Component {
                     <label>Categories</label>
                     <input
                       type="text"
-                      className= "validate"
-                      {...categories}/>
+                      className="validate" {...categories} />
+                    <div className="red-text text-darken-3">
+                      {categories.touched ? categories.error : ""}
+                    </div>
                 </div>
 
                 <div className="input-field">
@@ -80,8 +83,12 @@ class PostsNew extends Component {
                     <textarea
                       className= "validate"
                       {...content} />
+                    <div className="red-text text-darken-3">
+                      {content.touched ? content.error : ""}
+                    </div>
                 </div>
                 <button type="submit" className="validate btn">Post</button>
+                <Link to="/" className="waves-effect waves-light  red darken-3 btn">Cancel</Link>
             </form>
         );
     }
@@ -92,6 +99,14 @@ function validate(values){
 
   if (!values.title) {
     errors.title = "Enter a title";
+  }
+
+  if (!values.categories) {
+    errors.categories = "Enter categories";
+  }
+
+  if (!values.content){
+    errors.content = "Type in your post!";
   }
 
   return errors;

@@ -2,3 +2,6 @@ textarea {
     height: 120px !important;
     border: 5px solid lightblue;
 }
+.btn{
+  margin: 5px;
+}
