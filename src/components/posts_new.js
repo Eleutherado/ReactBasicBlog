@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import { reduxForm, Field } from 'redux-form'; // new Component Field
 import { createPost } from "../actions/index";
 //import { connect } from "react-redux";
@@ -52,46 +52,59 @@ class PostsNew extends Component {
   }
   */
 
-    render() {
-      /* redux-form v4 */
-        const { fields:{ title, categories, content },handleSubmit } = this.props;
-        return (
-            <form onSubmit={handleSubmit(this.props.createPost)}>
-                <h3>Share Your Story</h3>
-                <div className="input-field">
-                    <label>Title</label>
-                    <input
-                      type="text"
-                      className="validate" {...title} />
-                    <div className="red-text text-darken-3">
-                      {title.touched ? title.error : ""}
-                    </div>
-                </div>
+  static contextTypes = {
+    router: PropTypes.object
+  };
 
-                <div className="input-field">
-                    <label>Categories</label>
-                    <input
-                      type="text"
-                      className="validate" {...categories} />
-                    <div className="red-text text-darken-3">
-                      {categories.touched ? categories.error : ""}
-                    </div>
-                </div>
+  onSubmit(props) {
+    this.props.createPost(props)
+      .then(() => {
+        //blog post has been created (promise resolved), nav to index
+        // We navigate by calling this.context.router.push("PATH")
+        this.context.router.push("/");
+      });
+  }
 
-                <div className="input-field">
-                    <label>Content</label>
-                    <textarea
-                      className= "validate"
-                      {...content} />
-                    <div className="red-text text-darken-3">
-                      {content.touched ? content.error : ""}
-                    </div>
-                </div>
-                <button type="submit" className="validate btn">Post</button>
-                <Link to="/" className="waves-effect waves-light  red darken-3 btn">Cancel</Link>
-            </form>
-        );
-    }
+  render() {
+    /* redux-form v4 */
+      const { fields:{ title, categories, content },handleSubmit } = this.props;
+      return (
+          <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
+              <h3>Share Your Story</h3>
+              <div className="input-field">
+                  <label>Title</label>
+                  <input
+                    type="text"
+                    className="validate" {...title} />
+                  <div className="red-text text-darken-3">
+                    {title.touched ? title.error : ""}
+                  </div>
+              </div>
+
+              <div className="input-field">
+                  <label>Categories</label>
+                  <input
+                    type="text"
+                    className="validate" {...categories} />
+                  <div className="red-text text-darken-3">
+                    {categories.touched ? categories.error : ""}
+                  </div>
+              </div>
+
+              <div className="input-field">
+                  <label>Content</label>
+                  <textarea
+                    className= "validate"
+                    {...content} />
+                  <div className="red-text text-darken-3">
+                    {content.touched ? content.error : ""}
+                  </div>
+              </div>
+              <button type="submit" className="validate btn">Post</button>
+              <Link to="/" className="waves-effect waves-light  red darken-3 btn">Cancel</Link>
+          </form>
+      );
+  }
 }
 
 function validate(values){
