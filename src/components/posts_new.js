@@ -62,6 +62,9 @@ class PostsNew extends Component {
                     <input
                       type="text"
                       className="validate" {...title} />
+                    <div className="red-text text-darken-3">
+                      {title.touched ? title.error : ""}
+                    </div>
                 </div>
 
                 <div className="input-field">
@@ -84,10 +87,21 @@ class PostsNew extends Component {
     }
 }
 
+function validate(values){
+  const errors = {};
+
+  if (!values.title) {
+    errors.title = "Enter a title";
+  }
+
+  return errors;
+}
+
 // connect: 1st argument is mapStateToProps, 2nd is mapDispatchToProps
 // reduxForm: 1st is form config, 2nd is mapStateToProps, 3rd mapDispatchToProps
 
 export default reduxForm({
     form: 'NewPostForm',
-    fields: ['title', 'categories', 'content']
-},null, { createPost })(PostsNew);
+    fields: ['title', 'categories', 'content'],
+    validate
+}, null, { createPost })(PostsNew);
