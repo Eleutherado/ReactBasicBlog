@@ -13,27 +13,45 @@ class PostsIndex extends Component {
         // ideal place to create action to fetch data
         this.props.fetchPosts();
     }
+
     renderPosts() {
-        return(
-            <div className="collection with-header flow-text">
-                <h1 className="collection-header"><i className="large material-icons">library_books</i>&emsp; View Blog Posts</h1>
-                <a href="#!" className="collection-item"><i className="material-icons">send</i>&emsp;&emsp; Post 1</a>
+      console.log("props", this.props);
+      console.log("posts", this.props.posts);
+      return this.props.posts.map((post) =>
+          <div key={post.id}
+            className="collection-item card blue-grey darken-1">
+            <div className="card-content white-text">
+              <span className="card-title"><strong>{post.title}</strong></span>
+              <p className="truncate">{post.content}</p>
             </div>
-        );
+            <div className="card-action">
+              <a href="#">Read
+                <span className="new badge" data-badge-caption={post.categories} />
+              </a>
+            </div>
+          </div>
+      );
     }
+
     render() {
         return(
             <div>
                 <div className="right-align">
-                    <Link to="/posts/new" className="waves-effect waves-light btn">
-                        Add a Post
-                    </Link>
+                    <Link to="/posts/new" className="waves-effect waves-light btn">Add a Post</Link>
                 </div>
-                {this.renderPosts()}
+                <div className="collection with-header flow-text">
+                  <h1 className="collection-header center-align"><i className="large material-icons">library_books</i>&emsp; View Blog Posts</h1>
+                  {this.renderPosts()}
+                </div>
             </div>
         );
     }
 }
 
+function mapStateToProps(state) {
+  console.log("state",state.posts)
+  return { posts: state.posts.allPosts };
+}
 
-export default connect(null, { fetchPosts })(PostsIndex);
+
+export default connect(mapStateToProps, { fetchPosts })(PostsIndex);
