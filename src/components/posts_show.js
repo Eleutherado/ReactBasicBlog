@@ -1,15 +1,23 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { viewPost } from "../actions/index";
+import { viewPost, deletePost } from "../actions/index";
+import { Link } from "react-router";
 
 class PostsShow extends Component {
 
   componentWillMount(){
+    //why does this.props contain deletePost and viewPost???
     this.props.viewPost(this.props.params.id)
   }
+
+  handleDeleteClick(id) {
+    this.props.deletePost(this.props.params.id)
+  }
+
   render(){
 
     const { story } = this.props;
+    console.log(this.props)
 
     if(!story){
       return <div>loading...</div>
@@ -17,6 +25,10 @@ class PostsShow extends Component {
     }
     return(
       <div>
+        <Link to="/" className=" waves-effect waves-light btn">Back to index</Link>
+        <button
+          className="right waves-effect waves-light red darken-3 btn"
+          onClick={this.handleDeleteClick.bind(this)}>Delete</button>
         <h2 className="center-align light-blue-text text-darken-4">{story.title}</h2>
         <h6 className="left-align">Categories: {story.categories}</h6>
         <p className="blue-grey-text text-darken-1">{story.content}</p>
@@ -31,5 +43,5 @@ function mapStateToProps(state){
   // to this.props vs state.props (!=)
   return { story: state.posts.post }
 }
-
-export default connect(mapStateToProps, {viewPost})(PostsShow);
+// {mapDispatchToProps}
+export default connect(mapStateToProps, {viewPost, deletePost})(PostsShow);
