@@ -15,8 +15,6 @@ class PostsIndex extends Component {
     }
 
     renderPosts() {
-      console.log("props", this.props);
-      console.log("posts", this.props.posts);
       return this.props.posts.map((post) =>
           <div key={post.id}
             className="collection-item card blue-grey darken-1">
@@ -25,9 +23,9 @@ class PostsIndex extends Component {
               <p className="truncate">{post.content}</p>
             </div>
             <div className="card-action">
-              <a href="#">Read
+              <Link to={"posts/" + post.id}>Read
                 <span className="new badge" data-badge-caption={post.categories} />
-              </a>
+              </Link>
             </div>
           </div>
       );
@@ -49,7 +47,6 @@ class PostsIndex extends Component {
 }
 
 function mapStateToProps(state) {
-  console.log("state",state.posts)
   return { posts: state.posts.allPosts };
 }
 
