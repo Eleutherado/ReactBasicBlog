@@ -1,9 +1,13 @@
-import React, { Component } from "react";
+import React, { Component, PropTypes } from "react";
 import { connect } from "react-redux";
 import { viewPost, deletePost } from "../actions/index";
 import { Link } from "react-router";
 
 class PostsShow extends Component {
+
+  static contextTypes = {
+    router: PropTypes.object
+  };
 
   componentWillMount(){
     //why does this.props contain deletePost and viewPost???
@@ -12,12 +16,14 @@ class PostsShow extends Component {
 
   handleDeleteClick(id) {
     this.props.deletePost(this.props.params.id)
+      .then(() => {
+        this.context.router.push("/");
+      });
   }
 
   render(){
 
     const { story } = this.props;
-    console.log(this.props)
 
     if(!story){
       return <div>loading...</div>
