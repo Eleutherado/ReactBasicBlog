@@ -25,6 +25,7 @@ class PostsIndex extends Component {
             <div className="card-action">
               <Link to={"posts/" + post.id}>Read
                 <span className="new badge" data-badge-caption={post.categories} />
+                <i className="right small material-icons">send</i>
               </Link>
             </div>
           </div>
