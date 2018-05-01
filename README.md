@@ -6,7 +6,7 @@ Used backend [API](https://reduxblog.herokuapp.com/) by Stephen Grider
 ---
 
 #### How to Start
-Checkout this repo, install dependencies, then start the gulp process with the following:
+Checkout this repo, install dependencies and then start the gulp process with the following:
 
 ```
 > git clone https://github.com/Eleutherado/ReactBasicBlog.git
